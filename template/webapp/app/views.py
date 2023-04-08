@@ -3,7 +3,6 @@ from django.contrib.auth.decorators import login_required
 
 from .models import ObjectModel, ChildObjectModel
 
-# OBJECT
 
 @login_required
 def get_objects(request):
@@ -21,7 +20,8 @@ def create_object(request):
 @login_required
 def get_object(request, obj_id):
     obj = ObjectModel.objects.get(pk=obj_id)
-    return render(request, 'object.html', context={'obj': obj})
+    children = ChildObjectModel.objects.filter(obj=obj).all()
+    return render(request, 'object.html', context={'obj': obj, 'children': children})
 
 
 @login_required
@@ -38,14 +38,6 @@ def delete_object(_, obj_id):
     obj = ObjectModel.objects.get(pk=obj_id)
     obj.delete()
     return redirect('/objects/')
-
-# CHILD
-
-@login_required
-def get_children(request, obj_id):
-    obj = ObjectModel.objects.get(pk=obj_id)
-    children = ChildObjectModel.objects.filter(obj=obj).all()
-    return render(request, 'children.html', context={'obj': obj, 'children': children})
 
 
 @login_required

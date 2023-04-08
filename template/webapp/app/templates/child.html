@@ -4,13 +4,12 @@
     <div class="row">
         <div class="col-sm-10">
             <div class="card" style="margin-top: 10px;">
-                <div class="card-header">object <b>{{ obj.id }}</b>, child {{ child.id }}</div>
+                <div class="card-header"><b>child {{ child.name }} of object {{ obj.name }}</b></div>
                 <div class="card-body">
                     <form action="/objects/{{ obj.id }}/children/{{ child.id }}/update" method="post" enctype="multipart/form-data">
                         {% csrf_token %}
                         <input type="text" name="name" value="{{ child.name }}" /><br>
-                        <textarea style="margin-top: 10px;" name="description" value="{{ child.description }}" rows="5" cols="50"></textarea><br>
-                        <button style="margin-top: 10px; width: 150px;" type="submit" class="btn btn-primary">add</button><br>
+                        <button style="margin-top: 10px; width: 150px;" type="submit" class="btn btn-primary">update</button><br>
                     </form>
                 </div>
             </div>
