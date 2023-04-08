@@ -29,7 +29,7 @@
                         </tr>
                         {% for obj in objects %}
                             <tr>
-                                <td>{{ obj.name }}</td>
+                                <td><a href="/objects/{{ obj.id }}/">{{ obj.name }}</a></td>
                                 <td>{{ obj.description }}</td>
                                 {%  if user.is_staff %}
                                     <td>[<a href="/objects/{{ obj.id }}/delete">delete</a>]</td>

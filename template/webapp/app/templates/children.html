@@ -29,8 +29,8 @@
                         </tr>
                         {% for child in children %}
                             <tr>
-                                <td>{{ obj.name }}</td>
-                                <td>{{ obj.description }}</td>
+                                <td><a href="/objects/{{ obj.id }}/children/{{ child.id }}/">{{ child.name }}</a></td>
+                                <td>{{ child.description }}</td>
                                 {%  if user.is_staff %}
                                     <td>[<a href="/objects/{{ obj.id }}/children/{{ child.id }}/delete">delete</a>]</td>
                                 {% else %}
