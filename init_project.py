@@ -11,7 +11,7 @@ def main():
 
     # - check <name> is not 'template'
     # - copy folder 'template' to <name>
-    # - run renaming tool
+    # - run renaming
 
 
 if __name__ == '__main__':

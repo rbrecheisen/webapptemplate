@@ -1,6 +1,6 @@
 #!/bin/bash
 
-cd webapp/app/migrations
+cd PROJECTNAME/app/migrations
 rm -r *
 touch __init__.py
 
