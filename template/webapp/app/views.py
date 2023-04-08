@@ -3,6 +3,7 @@ from django.contrib.auth.decorators import login_required
 
 from .models import ObjectModel, ChildObjectModel
 
+# OBJECT
 
 @login_required
 def get_objects(request):
@@ -33,7 +34,46 @@ def update_object(request, obj_id):
 
 
 @login_required
-def delete_object(request, obj_id):
+def delete_object(_, obj_id):
     obj = ObjectModel.objects.get(pk=obj_id)
     obj.delete()
     return redirect('/objects/')
+
+# CHILD
+
+@login_required
+def get_children(request, obj_id):
+    obj = ObjectModel.objects.get(pk=obj_id)
+    children = ChildObjectModel.objects.filter(obj=obj).all()
+    return render(request, 'children.html', context={'obj': obj, 'children': children})
+
+
+@login_required
+def create_child(request, obj_id):
+    obj = ObjectModel.objects.get(pk=obj_id)
+    ChildObjectModel.objects.create(name=request.POST.get('name'), obj=obj)
+    return redirect(f'/objects/{obj_id}/children/')
+
+
+@login_required
+def get_child(request, obj_id, child_id):
+    obj = ObjectModel.objects.get(pk=obj_id)
+    child = ChildObjectModel.objects.filter(obj=obj, pk=child_id).first()
+    return render(request, 'child.html', context={'obj': obj, 'child': child})
+
+
+@login_required
+def update_child(request, obj_id, child_id):
+    obj = ObjectModel.objects.get(pk=obj_id)
+    child = ChildObjectModel.objects.filter(obj=obj, pk=child_id).first()
+    child.name = request.POST.get('name')
+    child.save()
+    return redirect(f'/objects/{obj_id}/children/{child_id}/')
+
+
+@login_required
+def delete_child(_, obj_id, child_id):
+    obj = ObjectModel.objects.get(pk=obj_id)
+    child = ChildObjectModel.objects.filter(obj=obj, pk=child_id).first()
+    child.delete()
+    return redirect(f'/objects/{obj_id}/children/')
