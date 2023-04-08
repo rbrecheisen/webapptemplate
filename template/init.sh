@@ -1,10 +1,7 @@
 #!/bin/bash
 
-cd PROJECTNAME/app/migrations
-rm -r *
-touch __init__.py
-
-cd ../..
+rm -r webapp/app/migrations/*
+touch webapp/app/migrations/__init__.py
 
 rm db.sqlite3
 
