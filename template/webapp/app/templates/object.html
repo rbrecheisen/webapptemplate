@@ -10,7 +10,7 @@
                     <form action="/objects/{{ obj.id }}/update" method="post" enctype="multipart/form-data">
                         {% csrf_token %}
                         <input type="text" name="name" value="{{ obj.name }}" /><br>
-                        <textarea style="margin-top: 10px;" name="description" value="{{ obj.description }}" rows="5" cols="50"></textarea><br>
+                        <textarea style="margin-top: 10px;" name="description" rows="5" cols="50">{{ obj.description }}</textarea><br>
                         <button style="margin-top: 10px; width: 150px;" type="submit" class="btn btn-primary">update</button><br>
                     </form>
                 </div>

@@ -30,7 +30,7 @@ def update_object(request, obj_id):
     obj.name = request.POST.get('name')
     obj.description = request.POST.get('description')
     obj.save()
-    return redirect(f'/objects/{obj_id}/')
+    return redirect(f'/objects/')
 
 
 @login_required
@@ -44,7 +44,7 @@ def delete_object(_, obj_id):
 def create_child(request, obj_id):
     obj = ObjectModel.objects.get(pk=obj_id)
     ChildObjectModel.objects.create(name=request.POST.get('name'), obj=obj)
-    return redirect(f'/objects/{obj_id}/children/')
+    return redirect(f'/objects/{obj_id}/')
 
 
 @login_required
@@ -60,7 +60,7 @@ def update_child(request, obj_id, child_id):
     child = ChildObjectModel.objects.filter(obj=obj, pk=child_id).first()
     child.name = request.POST.get('name')
     child.save()
-    return redirect(f'/objects/{obj_id}/children/{child_id}/')
+    return redirect(f'/objects/{obj_id}/')
 
 
 @login_required
@@ -68,4 +68,4 @@ def delete_child(_, obj_id, child_id):
     obj = ObjectModel.objects.get(pk=obj_id)
     child = ChildObjectModel.objects.filter(obj=obj, pk=child_id).first()
     child.delete()
-    return redirect(f'/objects/{obj_id}/children/')
+    return redirect(f'/objects/{obj_id}/')
