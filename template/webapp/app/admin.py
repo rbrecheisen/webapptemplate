@@ -1,3 +1,17 @@
 from django.contrib import admin
 
-# Register your models here.
+
+@admin.register
+class ObjectModelAdmin(admin.ModelAdmin):
+    list = (
+        'name',
+        'description',
+    )
+
+
+@admin.register
+class ChildObjectModelAdmin(admin.ModelAdmin):
+    list = (
+        'name',
+        'obj',
+    )
