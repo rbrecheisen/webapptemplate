@@ -13,6 +13,8 @@ def main():
         raise RuntimeError('new name cannot be "template"')
     shutil.copytree('template', args.name)
 
+    # rename files and content where necessary
+
 
 if __name__ == '__main__':
     main()
