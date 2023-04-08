@@ -1,0 +1,3 @@
+- write script that:
+    - copies template folder to <name>
+    - renames everything
