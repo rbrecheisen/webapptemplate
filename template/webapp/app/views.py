@@ -69,3 +69,11 @@ def delete_child(_, obj_id, child_id):
     child = ChildObjectModel.objects.filter(obj=obj, pk=child_id).first()
     child.delete()
     return redirect(f'/objects/{obj_id}/')
+
+
+def upload(request):
+    pass
+
+
+def download(request, file_name):
+    pass
