@@ -4,12 +4,16 @@ from django.contrib.auth.decorators import login_required
 from .models import ObjectModel, ChildObjectModel
 
 
+""" ------------------------------------------------------------------------
+"""
 @login_required
 def get_objects(request):
     objects = ObjectModel.objects.all()
     return render(request, 'objects.html', context={'objects': objects})
 
 
+""" ------------------------------------------------------------------------
+"""
 @login_required
 def create_object(request):
     ObjectModel.objects.create(
@@ -17,6 +21,8 @@ def create_object(request):
     return redirect('/objects/')
 
 
+""" ------------------------------------------------------------------------
+"""
 @login_required
 def get_object(request, obj_id):
     obj = ObjectModel.objects.get(pk=obj_id)
@@ -24,6 +30,8 @@ def get_object(request, obj_id):
     return render(request, 'object.html', context={'obj': obj, 'children': children})
 
 
+""" ------------------------------------------------------------------------
+"""
 @login_required
 def update_object(request, obj_id):
     obj = ObjectModel.objects.get(pk=obj_id)
@@ -33,6 +41,8 @@ def update_object(request, obj_id):
     return redirect(f'/objects/')
 
 
+""" ------------------------------------------------------------------------
+"""
 @login_required
 def delete_object(_, obj_id):
     obj = ObjectModel.objects.get(pk=obj_id)
@@ -40,6 +50,8 @@ def delete_object(_, obj_id):
     return redirect('/objects/')
 
 
+""" ------------------------------------------------------------------------
+"""
 @login_required
 def create_child(request, obj_id):
     obj = ObjectModel.objects.get(pk=obj_id)
@@ -47,6 +59,8 @@ def create_child(request, obj_id):
     return redirect(f'/objects/{obj_id}/')
 
 
+""" ------------------------------------------------------------------------
+"""
 @login_required
 def get_child(request, obj_id, child_id):
     obj = ObjectModel.objects.get(pk=obj_id)
@@ -54,6 +68,8 @@ def get_child(request, obj_id, child_id):
     return render(request, 'child.html', context={'obj': obj, 'child': child})
 
 
+""" ------------------------------------------------------------------------
+"""
 @login_required
 def update_child(request, obj_id, child_id):
     obj = ObjectModel.objects.get(pk=obj_id)
@@ -63,6 +79,8 @@ def update_child(request, obj_id, child_id):
     return redirect(f'/objects/{obj_id}/')
 
 
+""" ------------------------------------------------------------------------
+"""
 @login_required
 def delete_child(_, obj_id, child_id):
     obj = ObjectModel.objects.get(pk=obj_id)
@@ -71,9 +89,13 @@ def delete_child(_, obj_id, child_id):
     return redirect(f'/objects/{obj_id}/')
 
 
+""" ------------------------------------------------------------------------
+"""
 def upload(request):
     pass
 
 
+""" ------------------------------------------------------------------------
+"""
 def download(request, file_name):
     pass
