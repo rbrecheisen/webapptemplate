@@ -6,6 +6,8 @@
             <div class="card" style="margin-top: 10px;">
                 <div class="card-header"><b>objects</b></div>
                 <div class="card-body">
+                    <a href="/objects/minio">minio</a><br>
+                    <br>
                     <form action="/objects/create" method="post" enctype="multipart/form-data">
                         {% csrf_token %}
                         <input type="text" name="name" placeholder="enter name" /><br>

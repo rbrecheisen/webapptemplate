@@ -31,6 +31,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'django_minio_backend',
     'app',
 ]
 
@@ -119,3 +120,9 @@ LOGOUT_REDIRECT_URL = '/'
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+MINIO_ENDPOINT = 'localhost:9000'
+MINIO_ACCESS_KEY = 'J6sHEvedfDlZZgxW'
+MINIO_SECRET_KEY = 'FX3INwPa8slNlanLh9BzcQph3kqULXS0'
+MINIO_USE_HTTPS = False
+MINIO_PRIVATE_BUCKETS = []

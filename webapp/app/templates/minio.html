@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-sm-10">
+            <div class="card" style="margin-top: 10px;">
+                <div class="card-header"><b>minio</b></div>
+                <div class="card-body">
+                    <form action="/objects/minio" method="post" enctype="multipart/form-data">
+                        {% csrf_token %}
+                        <button style="margin-top: 10px; width: 150px;" type="submit" class="btn btn-primary">get minio object</button><br>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

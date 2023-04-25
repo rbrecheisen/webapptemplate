@@ -91,6 +91,17 @@ def delete_child(_, obj_id, child_id):
 
 """ ------------------------------------------------------------------------
 """
+def minio(request):
+    if request.method == 'POST':
+        from django_minio_backend import MinioBackend
+        backend = MinioBackend()
+        client = backend.client
+        client.fget_object('my-scan', 'original.dcm', 'original.dcm')
+    return render(request, 'minio.html', context={})
+
+
+""" ------------------------------------------------------------------------
+"""
 def upload(request):
     pass
 

@@ -12,6 +12,7 @@ urlpatterns = [
     path('objects/<int:obj_id>/children/<int:child_id>/', views.get_child),
     path('objects/<int:obj_id>/children/<int:child_id>/update', views.update_child),
     path('objects/<int:obj_id>/children/<int:child_id>/delete', views.delete_child),
+    path('objects/minio', views.minio),
     # path('upload', views.upload),
     # path('download/<str:file_name>', views.download),
 ]
