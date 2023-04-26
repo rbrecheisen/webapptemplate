@@ -14,7 +14,5 @@ urlpatterns = [
     path('objects/<int:obj_id>/children/<int:child_id>/delete', views.delete_child),
     path('minio/buckets/', views.get_buckets),
     path('minio/buckets/<str:bucket_name>/', views.get_bucket_objects),
-    path('minio/buckets/<str:bucket_name>/', views.process_bucket_objects),
-    # path('upload', views.upload),
-    # path('download/<str:file_name>', views.download),
+    path('minio/buckets/<str:bucket_name>/process', views.process_bucket_objects),
 ]

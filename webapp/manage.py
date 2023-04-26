@@ -9,7 +9,7 @@ def is_debugging():
 
 
 if is_debugging():
-    sys.argv = ['/Users/ralph/dev/webapptemplate/template/webapp/manage.py', 'runserver']
+    sys.argv = ['/Users/ralph/dev/webapptemplate/webapp/manage.py', 'runserver']
 
 
 def main():

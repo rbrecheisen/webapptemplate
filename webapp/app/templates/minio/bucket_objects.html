@@ -7,13 +7,16 @@
                 <div class="card-header"><b>objects for {{ bucket_name }}</b></div>
                 <div class="card-body">
                     <table class="table">
-                        <tr>
-                            <th>name</th>
-                        </tr>
+                        <form action="/minio/buckets/{{ bucket_name }}/process" method="post" enctype="multipart/form-data">
+                            {% csrf_token %}
+                            <button style="margin-top: 10px; width: 150px;" type="submit" class="btn btn-primary">process</button><br>
+                            <br>
+                            <input type="checkbox" name="recursive_cbx" checked/>&nbsp;<label for="recursive_cbx">process recursively</label><br>
+                        </form>
+                        <br>
+                        <tr><th>name</th></tr>
                         {% for bucket_object in bucket_objects %}
-                            <tr>
-                                <td>{{ bucket_object.object_name }}</td>
-                            </tr>
+                            <tr><td>{{ bucket_object.object_name }}</td></tr>
                         {% endfor %}
                     </table>
                 </div>
