@@ -92,21 +92,52 @@ def delete_child(_, obj_id, child_id):
 
 """ ------------------------------------------------------------------------
 """
-def minio(request):
-    if request.method == 'POST':
-        client = MinioBackend().client
-        client.fget_object('my-bucket', 'cancer.csv', 'cancer.csv')
-        return redirect(f'/objects/')
-    return render(request, 'minio.html', context={})
+@login_required
+def get_buckets(request):
+    client = MinioBackend().client
+    buckets = client.list_buckets()
+    return render(request, 'minio/buckets.html', context={'buckets': buckets})
 
 
 """ ------------------------------------------------------------------------
 """
-def upload(request):
-    pass
+@login_required
+def get_bucket_objects(request, bucket_name):
+    client = MinioBackend().client
+    bucket_objects = client.list_objects(bucket_name)
+    return render(request, 'minio/bucket_objects.html', context={
+        'bucket_name': bucket_name, 
+        'bucket_objects': bucket_objects
+        })
 
 
 """ ------------------------------------------------------------------------
+There are two scenario's: (1) The bucket contains a flat list of DICOM images
+at L3 level or (2) the bucket contains a list of folders, each containing
+DICOM images for a complete CT scan.
+
+Question is how do we detect which scenario we are dealing with? In the first
+scenario all images can be download to Mosamatic and processed. In the second
+scenario each folder should be separately downloaded and processed before 
+proceeding to the next folder. The previously downloaded folder should be 
+deleted from Mosamatic.
+
+We can use bucket tags for this purpose. In MinIO you can specify for each 
+bucket a number of tags, e.g., "scans=true" to indicate the bucket contains
+scan folders instead of only L3 images.
 """
-def download(request, file_name):
-    pass
+@login_required
+def process_bucket_objects(request, bucket_name):    
+    client = MinioBackend().client
+    tags = client.get_bucket_tags(bucket_name)
+    if 'scans' in tags.keys():
+        # processing bucket as list of scan folders
+        pass
+    else:
+        # processing bucket as list of L3 images
+        pass
+    bucket_objects = client.list_objects(bucket_name)
+    return render(request, 'minio/bucket_objects.html', context={
+        'bucket_name': bucket_name, 
+        'bucket_objects': bucket_objects
+        })

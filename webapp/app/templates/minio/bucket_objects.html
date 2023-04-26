@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-sm-10">
+            <div class="card" style="margin-top: 10px;">
+                <div class="card-header"><b>objects for {{ bucket_name }}</b></div>
+                <div class="card-body">
+                    <table class="table">
+                        <tr>
+                            <th>name</th>
+                        </tr>
+                        {% for bucket_object in bucket_objects %}
+                            <tr>
+                                <td>{{ bucket_object.object_name }}</td>
+                            </tr>
+                        {% endfor %}
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
