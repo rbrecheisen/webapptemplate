@@ -1,4 +1,4 @@
 #!/bin/bash
 
 # install: brew install minio/stable/minio
-minio server /tmp/minio/data --console-address :9090
+minio server /tmp/minio --console-address :9090
