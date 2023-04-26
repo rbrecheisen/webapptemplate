@@ -1,5 +1,6 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth.decorators import login_required
+from django_minio_backend import MinioBackend
 
 from .models import ObjectModel, ChildObjectModel
 
@@ -93,10 +94,9 @@ def delete_child(_, obj_id, child_id):
 """
 def minio(request):
     if request.method == 'POST':
-        from django_minio_backend import MinioBackend
-        backend = MinioBackend()
-        client = backend.client
-        client.fget_object('my-scan', 'original.dcm', 'original.dcm')
+        client = MinioBackend().client
+        client.fget_object('my-bucket', 'cancer.csv', 'cancer.csv')
+        return redirect(f'/objects/')
     return render(request, 'minio.html', context={})
 
 

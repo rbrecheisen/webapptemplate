@@ -122,7 +122,8 @@ LOGOUT_REDIRECT_URL = '/'
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 MINIO_ENDPOINT = 'localhost:9000'
-MINIO_ACCESS_KEY = 'J6sHEvedfDlZZgxW'
-MINIO_SECRET_KEY = 'FX3INwPa8slNlanLh9BzcQph3kqULXS0'
+MINIO_ACCESS_KEY = open(os.path.join(os.environ['HOME'], 'minioaccesskey.txt')).readline().strip()
+MINIO_SECRET_KEY = open(os.path.join(os.environ['HOME'], 'miniosecret.txt')).readline().strip()
 MINIO_USE_HTTPS = False
+MINIO_PUBLIC_BUCKETS = []
 MINIO_PRIVATE_BUCKETS = []
