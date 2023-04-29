@@ -118,8 +118,23 @@ def process_bucket_objects(request, bucket_name):
     client = MinioBackend().client
     # todo: get form param "recursive_cbx"
     recursive = request.POST.get('recursive_cbx')
-    print(recursive)
-    bucket_objects = client.list_objects(bucket_name)
+    if recursive == 'on':
+        # we're dealing with scan folder
+        bucket_objects = client.list_objects(bucket_name, recursive=True)
+        # get list of scan folders
+        scan_folders = []
+        for bucket_object in bucket_objects:
+            scan_folder = bucket_object.object_name.split('/')[1]
+            if scan_folder not in scan_folders:
+                scan_folders.append(scan_folder)
+        print(scan_folders)
+    else:
+        # we're dealing with L3 images
+        bucket_objects = client.list_objects(bucket_name)
+        files = []
+        for bucket_object in bucket_objects:
+            files.append(bucket_object.object_name)
+        print(files)
     return render(request, 'minio/bucket_objects.html', context={
         'bucket_name': bucket_name, 
         'bucket_objects': bucket_objects
